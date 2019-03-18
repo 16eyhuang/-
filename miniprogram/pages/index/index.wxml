@@ -1,0 +1,134 @@
+<view class='top'>
+  <view class='{{isSelected[0]?"selected":"normal"}}' bindtap='switchItem' data-item='0' hover-class='bg_grey'>
+    <text class='{{isSelected[0]?"border":""}}'>切牙组</text>
+  </view>
+  <view class='{{isSelected[1]?"selected":"normal"}}' bindtap='switchItem' data-item='1' hover-class='bg_grey'>
+    <text class='{{isSelected[1]?"border":""}}'>尖牙组</text>
+  </view>
+  <view class='{{isSelected[2]?"selected":"normal"}}' bindtap='switchItem' data-item='2' hover-class='bg_grey'>
+    <text class='{{isSelected[2]?"border":""}}'>前磨牙组</text>
+  </view>
+  <view class='{{isSelected[3]?"selected":"normal"}}' bindtap='switchItem' data-item='3' hover-class='bg_grey'>
+    <text class='{{isSelected[3]?"border":""}}'>磨牙组</text>
+  </view>
+</view>
+
+<view wx:if="{{isSelected[1]}}" style='display:flex;flex-wrap:wrap;'>
+  <view wx:for="{{jianyazu.show}}" wx:key="tooth0" style='width:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:50rpx;' hover-class='bg_grey' data-name="{{item.name}}" bindtap='toDetail'>
+    <image class='img' src='{{item.img_url}}' catchtap='previewPhoto' data-url="{{item.img_url}}"></image>
+    <text style='font-size:28rpx;'>{{item.name}}</text>
+  </view>
+</view>
+
+<view wx:if="{{isSelected[1]}}" class='bottomContainer'>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>综述：</view>
+    <view style='width:70%;font-size:28rpx;'>{{jianyazu.summary}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>形态特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{jianyazu.xingtai}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>牙冠特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{jianyazu.yaguan}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>功能特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{jianyazu.gongneng}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>备注：</view>
+    <view style='width:70%;font-size:28rpx;'>{{jianyazu.remarks}}</view>
+  </view>
+</view>
+
+<view wx:if="{{isSelected[3]}}" style='display:flex;flex-wrap:wrap;'>
+  <view wx:for="{{moyazu.show}}" wx:key="tooth1" style='width:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:50rpx;' hover-class='bg_grey' data-name="{{item.name}}" bindtap='toDetail'>
+    <image class='img' src='{{item.img_url}}' catchtap='previewPhoto' data-url="{{item.img_url}}"></image>
+    <text style='font-size:28rpx;'>{{item.name}}</text>
+  </view>
+</view>
+
+<view wx:if="{{isSelected[3]}}" class='bottomContainer'>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>综述：</view>
+    <view style='width:70%;font-size:28rpx;'>{{moyazu.summary}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>形态特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{moyazu.xingtai}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>牙冠特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{moyazu.yaguan}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>牙根特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{moyazu.yagen}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>功能特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{moyazu.gongneng}}</view>
+  </view>
+</view>
+
+<view wx:if="{{isSelected[2]}}" style='display:flex;flex-wrap:wrap;'>
+  <view wx:for="{{qianmoyazu.show}}" wx:key="tooth2" style='width:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:50rpx;' hover-class='bg_grey' data-name="{{item.name}}" bindtap='toDetail'>
+    <image class='img' src='{{item.img_url}}' catchtap='previewPhoto' data-url="{{item.img_url}}"></image>
+    <text style='font-size:28rpx;'>{{item.name}}</text>
+  </view>
+</view>
+
+<view wx:if="{{isSelected[2]}}" class='bottomContainer'>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>综述：</view>
+    <view style='width:70%;font-size:28rpx;'>{{qianmoyazu.summary}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>牙冠特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{qianmoyazu.yaguan}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>牙根特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{qianmoyazu.yagen}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>功能特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{qianmoyazu.gongneng}}</view>
+  </view>
+</view>
+
+<view wx:if="{{isSelected[0]}}" style='display:flex;flex-wrap:wrap;'>
+  <view wx:for="{{qieyazu.show}}" wx:key="tooth3" style='width:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:50rpx;' hover-class='bg_grey' data-name="{{item.name}}" bindtap='toDetail'>
+    <image class='img' src='{{item.img_url}}' catchtap='previewPhoto' data-url="{{item.img_url}}"></image>
+    <text style='font-size:28rpx;'>{{item.name}}</text>
+  </view>
+</view>
+
+<view wx:if="{{isSelected[0]}}" class='bottomContainer'>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>综述：</view>
+    <view style='width:70%;font-size:28rpx;'>{{qieyazu.summary}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>形态特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{qieyazu.xingtai}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>牙冠特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{qieyazu.yaguan}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>牙根特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{qieyazu.yagen}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>功能特点：</view>
+    <view style='width:70%;font-size:28rpx;'>{{qieyazu.gongneng}}</view>
+  </view>
+  <view class='bottomItem'>
+    <view style='width:25%;font-size:28rpx;text-align:center;'>备注：</view>
+    <view style='width:70%;font-size:28rpx;'>{{qieyazu.remarks}}</view>
+  </view>
+</view>
