@@ -7,6 +7,7 @@ Page({
   data: {
     swiperCurrent:0,
     isShow:[true,true],
+    flag:true,
   },
 
   /**
@@ -29,8 +30,40 @@ Page({
         console.log(res)
         if (res.errMsg =="cloud.callFunction:ok"){
           if (res.result.data[0] != null && res.result.data[0]!=''){
+            function trimNumber(str) {
+              return str.replace(/\d+/g, '');
+            } 
+
+            function deepClone(obj) {
+              let objClone = Array.isArray(obj) ? [] : {};
+              if (obj && typeof obj === "object") {
+                for (let key in obj) {
+                  if (obj.hasOwnProperty(key)) {
+                    //判断ojb子元素是否为对象，如果是，递归复制
+                    if (obj[key] && typeof obj[key] === "object") {
+                      objClone[key] = deepClone(obj[key]);
+                    } else {
+                      //如果不是，简单复制
+                      objClone[key] = obj[key];
+                    }
+                  }
+                }
+              }
+              return objClone;
+            }  
+
+            let showObj2=deepClone(res.result.data[0])
+            console.log(showObj2)
+            if(showObj2.img_arr!=null||showObj2.img_arr!=''){
+              for (let i in showObj2.img_arr){
+                showObj2.img_arr[i].name = trimNumber(showObj2.img_arr[i].name)
+              }
+            }
+            console.log(showObj2)
+
             that.setData({
-              showObj: res.result.data[0]
+              showObj: res.result.data[0],
+              showObj2
             })
           }
           wx.hideLoading()

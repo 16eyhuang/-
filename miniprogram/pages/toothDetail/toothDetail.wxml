@@ -4,7 +4,7 @@
   </view>
 </view>
 
-<swiper wx:if="{{showObj.img_arr.length!=0&&showObj.img_arr!=null}}" style='margin-left:5%;width:90%;height:750rpx;' current='{{swiperCurrent}}' indicator-dots='true' bindchange='swiperChange'>
+<swiper wx:if="{{showObj.img_arr.length!=0&&showObj.img_arr!=null}}" style='margin-left:5%;width:90%;height:750rpx;' current='{{swiperCurrent}}' indicator-dots='{{flag}}' bindchange='swiperChange'>
   <block style="width:100%;" wx:for="{{showObj.img_arr}}" wx:key="img">
     <swiper-item style="width:100%;">
       <image style='width:100%;' src='{{item.url}}' mode='widthFix' catchtap='previewPhoto' data-index="{{index}}"></image>
@@ -12,7 +12,12 @@
   </block>
 </swiper>
 
-<view style='width:90%;margin-left:5%;margin-top:50rpx;border-bottom:1rpx solid #eee;padding-bottom:10rpx;display:flex;align-items:center;'>
+<view wx:if="{{showObj.img_arr.length!=0&&showObj.img_arr!=null}}" style='width:90%;margin-left:5%;border-bottom:1rpx solid #eee;padding-bottom:10rpx;display:flex;align-items:center;'>
+  <text style='font-size:50rpx;font-weight:bold;margin:20rpx;'>{{showObj2.img_arr[swiperCurrent].name}}</text>
+  <image style='position:absolute;right:50rpx;width:50rpx;height:50rpx;margin:10rpx;' src='{{isShow[0]?"../../images/arrow_up.png":"../../images/arrow_down.png"}}' catchtap='changeState' data-item="0"></image>
+</view>
+
+<view wx:else style='width:90%;margin-left:5%;border-bottom:1rpx solid #eee;padding-bottom:10rpx;display:flex;align-items:center;'>
   <text style='font-size:50rpx;font-weight:bold;margin:20rpx;'>牙冠</text>
   <image style='position:absolute;right:50rpx;width:50rpx;height:50rpx;margin:10rpx;' src='{{isShow[0]?"../../images/arrow_up.png":"../../images/arrow_down.png"}}' catchtap='changeState' data-item="0"></image>
 </view>
@@ -33,7 +38,47 @@
   </block>
 </view> -->
 
-<view class='bottomContainer' wx:if="{{isShow[0]}}">
+<view wx:if="{{showObj.img_arr.length!=0&&showObj.img_arr!=null&&isShow[0]}}" class='bottomContainer'>
+  <block wx:for="{{showObj.yaguan}}" wx:key="yaguan">
+    <view class='bottomItem' wx:if="{{item.name==showObj2.img_arr[swiperCurrent].name}}">
+      <view style='width:25%;font-size:28rpx;text-align:center;margin-right:20rpx;'>{{item.name}}：</view>
+      <view wx:if="{{item.detail[0].length === 1}}" style='width:70%;font-size:28rpx;'>{{item.detail}}</view>
+      <view wx:else style='width:70%;font-size:28rpx;display:flex;flex-direction:column;'>
+        <block wx:for="{{item.detail}}" wx:key="detail" wx:for-item="detail" wx:for-index="index2">
+          <view style='width:100%;display:flex;flex-direction:column;padding-bottom:20rpx;'>
+            <view style='display:flex;flex-direction:column;' wx:if="{{detail.name==''||detail.name==null}}">
+              <text>{{detail}}</text>
+            </view>
+            <view style='display:flex;flex-direction:column;' wx:if="{{detail.name!=''&&detail.name!=null&&detail.detail[0].length === 1}}">
+              <text>{{detail.name}}：</text>
+              <text>{{detail.detail}}</text>
+            </view>
+            <view wx:if="{{detail.name!=''&&detail.name!=null&&detail.detail[0].length>1}}">
+              <text>{{detail.name}}：</text>
+              <view style='display:flex;flex-direction:column;'>
+                <block wx:for="{{detail.detail}}" wx:for-item="detail2">
+                  <text>{{detail2}}</text>
+                </block>
+              </view>
+            </view>
+            <view wx:if="{{detail.name!=''&&detail.name!=null&&detail.detail[0].name!=''&&detail.detail[0].name!=null}}">
+              <text>{{detail.name}}：</text>
+              <view style='display:flex;flex-direction:column;'>
+                <block wx:for="{{detail.detail}}" wx:for-item="detail2" wx:key="detail22">
+                  <text wx:if="{{detail2.name!=null&&detail2.name!=''}}">{{detail2.name}}：</text>
+                  <text>{{detail2.detail}}</text>
+                </block>
+              </view>
+            </view>
+            <!-- <text>{{detail}}</text> -->
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>
+
+<view wx:if="{{showObj.img_arr[0]==null&&isShow[0]}}" class='bottomContainer'>
   <block wx:for="{{showObj.yaguan}}" wx:key="yaguan">
     <view class='bottomItem'>
       <view style='width:25%;font-size:28rpx;text-align:center;margin-right:20rpx;'>{{item.name}}：</view>
@@ -72,7 +117,6 @@
     </view>
   </block>
 </view>
-
 
 
 <view style='width:90%;margin-left:5%;margin-top:50rpx;border-bottom:1rpx solid #eee;padding-bottom:10rpx;display:flex;align-items:center;'>
