@@ -1,3 +1,15 @@
+<view wx:if="{{!isLogin}}" style='width:100%;height:1200rpx;display:flex;flex-direction:column;align-items:center;'>
+  <image style='width:175rpx;height:175rpx;border-radius:50%;margin-top:200rpx;' src='../../images/tihuan.png'></image>
+  <text style='font-size:35rpx;margin-top:50rpx;'>欢迎来到口腔讲堂</text>
+  <text style='text-align:center;color:#999;font-size:30rpx;width:60%;margin-top:0rpx;'>
+    文字内容参考第八版《口腔解剖生理学》人民卫生出版社
+  </text>
+  <text style='text-align:center;color:#999;font-size:30rpx;width:60%;margin-top:0rpx;'>
+    感谢汕头大学医学院口腔门诊部提供实体牙齿
+  </text>
+  <button style='margin-top:350rpx;width:70%;background-color:#2d8cf0;font-size:30rpx;color:#fff;border-radius:50rpx;' bindtap='click'>点击进入了解口腔信息</button>
+</view>
+<view wx:if="{{isLogin}}">
 <view class='top'>
   <view class='{{isSelected[0]?"selected":"normal"}}' bindtap='switchItem' data-item='0' hover-class='bg_grey'>
     <text class='{{isSelected[0]?"border":""}}'>切牙组</text>
@@ -131,4 +143,5 @@
     <view style='width:25%;font-size:28rpx;text-align:center;'>备注：</view>
     <view style='width:70%;font-size:28rpx;'>{{qieyazu.remarks}}</view>
   </view>
+</view>
 </view>

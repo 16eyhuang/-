@@ -11,6 +11,7 @@ Page({
     toothGroup:['尖牙组','磨牙组','前磨牙组','切牙组'],
     isSelected:[true,false,false,false],
     test:[1,1,1,1],
+    isLogin: false,
 
     // jianyazu:{
     //   summary: '尖牙位于侧切牙远中, 上、下、左、右共4颗, 包括上颌尖牙和下颌尖牙。',
@@ -113,38 +114,54 @@ Page({
     // },
   },
 
-  onLoad: function() {
-    wx.showLoading({
-      title: '加载中',
-      mask:true,
+  click:function(){
+    this.setData({
+      isLogin:true
     })
+    this.onLoad()
+  },
 
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '../chooseLib/chooseLib',
-      })
-      return
-    }
+  getUserInfo: function (e) {
+    console.log(e)
+    app.globalData.userInfo = e.detail.userInfo
+    wx.setStorageSync('userInfo', e.detail.userInfo)
+    this.setData({
+      isLogin: true
+    })
+    this.onLoad()
+  },
+
+  onLoad: function() {
+    // wx.showLoading({
+    //   title: '加载中',
+    //   mask:true,
+    // })
+
+    // if (!wx.cloud) {
+    //   wx.redirectTo({
+    //     url: '../chooseLib/chooseLib',
+    //   })
+    //   return
+    // }
 
     // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              this.setData({
-                avatarUrl: res.userInfo.avatarUrl,
-                userInfo: res.userInfo
-              })
-            }
-          })
-        }
-      }
-    })
-
+    // wx.getSetting({
+    //   success: res => {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+    //       wx.getUserInfo({
+    //         success: res => {
+    //           this.setData({
+    //             avatarUrl: res.userInfo.avatarUrl,
+    //             userInfo: res.userInfo
+    //           })
+    //         }
+    //       })
+    //     }
+    //   }
+    // })
     wx.setNavigationBarTitle({
-      title: '口腔小课堂',
+      title: '口腔讲堂',
     })
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -154,6 +171,16 @@ Page({
       })
     }
     let that=this
+
+    if(that.data.isLogin==false){
+      return
+    }
+
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
+
     wx.cloud.callFunction({
       name:'get',
       success(res){
