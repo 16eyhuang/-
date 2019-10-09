@@ -12,7 +12,8 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2d8cf0",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "牙体解剖学习平台",
     "navigationBarTextStyle": "white"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

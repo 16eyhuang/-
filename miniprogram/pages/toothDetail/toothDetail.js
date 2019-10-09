@@ -6,7 +6,7 @@ Page({
    */
   data: {
     swiperCurrent:0,
-    isShow:[true,true],
+    isShow:[true,true,true,true],
     flag:true,
   },
 

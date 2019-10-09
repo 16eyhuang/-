@@ -118,13 +118,25 @@
   </block>
 </view>
 
-
 <view style='width:90%;margin-left:5%;margin-top:50rpx;border-bottom:1rpx solid #eee;padding-bottom:10rpx;display:flex;align-items:center;'>
-  <text style='font-size:50rpx;font-weight:bold;margin:20rpx;'>牙根</text>
+  <text style='font-size:50rpx;font-weight:bold;margin:20rpx;'>总体特点</text>
   <image style='position:absolute;right:50rpx;width:50rpx;height:50rpx;margin:10rpx;' src='{{isShow[1]?"../../images/arrow_up.png":"../../images/arrow_down.png"}}' catchtap='changeState' data-item="1"></image>
 </view>
 
 <view class='bottomContainer' wx:if="{{isShow[1]}}">
+  <view class='bottomItem'>
+    <view style='width:90%;margin-left:5%;font-size:28rpx'>{{showObj.summary}}</view>
+  </view>
+</view>
+
+
+
+<view style='width:90%;margin-left:5%;margin-top:50rpx;border-bottom:1rpx solid #eee;padding-bottom:10rpx;display:flex;align-items:center;'>
+  <text style='font-size:50rpx;font-weight:bold;margin:20rpx;'>牙根</text>
+  <image style='position:absolute;right:50rpx;width:50rpx;height:50rpx;margin:10rpx;' src='{{isShow[2]?"../../images/arrow_up.png":"../../images/arrow_down.png"}}' catchtap='changeState' data-item="2"></image>
+</view>
+
+<view class='bottomContainer' wx:if="{{isShow[2]}}">
   <block wx:for="{{showObj.yagen}}" wx:key="yagen">
     <view class='bottomItem'>
       <view style='width:25%;font-size:28rpx;text-align:center;margin-right:20rpx;'>{{item.name}}：</view>
@@ -163,3 +175,65 @@
     </view>
   </block>
 </view>
+
+
+
+
+<view style='width:90%;margin-left:5%;margin-top:50rpx;border-bottom:1rpx solid #eee;padding-bottom:10rpx;display:flex;align-items:center;'>
+  <text style='font-size:50rpx;font-weight:bold;margin:20rpx;'>髓腔形态</text>
+  <image style='position:absolute;right:50rpx;width:50rpx;height:50rpx;margin:10rpx;' src='{{isShow[3]?"../../images/arrow_up.png":"../../images/arrow_down.png"}}' catchtap='changeState' data-item="3"></image>
+</view>
+
+<view class='bottomContainer' wx:if="{{isShow[3]}}">
+  <block wx:for="{{showObj.suiqiang}}" wx:key="suiqiang">
+    <view class='bottomItem'>
+      <view style='width:25%;font-size:28rpx;text-align:center;margin-right:20rpx;'>{{item.name}}：</view>
+      <view wx:if="{{item.detail[0].length === 1}}" style='width:70%;font-size:28rpx;'>{{item.detail}}</view>
+      <view wx:else style='width:70%;font-size:28rpx;display:flex;flex-direction:column;'>
+        <block wx:for="{{item.detail}}" wx:key="detail" wx:for-item="detail" wx:for-index="index2">
+          <view style='width:100%;display:flex;flex-direction:column;padding-bottom:20rpx;'>
+            <view style='display:flex;flex-direction:column;' wx:if="{{detail.name==''||detail.name==null}}">
+              <text>{{detail}}</text>
+            </view>
+            <view style='display:flex;flex-direction:column;' wx:if="{{detail.name!=''&&detail.name!=null&&detail.detail[0].length === 1}}">
+              <text>{{detail.name}}：</text>
+              <text>{{detail.detail}}</text>
+            </view>
+            <view wx:if="{{detail.name!=''&&detail.name!=null&&detail.detail[0].length>1}}">
+              <text>{{detail.name}}：</text>
+              <view style='display:flex;flex-direction:column;'>
+                <block wx:for="{{detail.detail}}" wx:for-item="detail2" wx:key="detail222">
+                  <text>{{detail2}}</text>
+                </block>
+              </view>
+            </view>
+            <view wx:if="{{detail.name!=''&&detail.name!=null&&detail.detail[0].name!=''&&detail.detail[0].name!=null}}">
+              <text>{{detail.name}}：</text>
+              <view style='display:flex;flex-direction:column;'>
+                <block wx:for="{{detail.detail}}" wx:for-item="detail2" wx:key="detail2">
+                  <text wx:if="{{detail2.name!=null&&detail2.name!=''}}">{{detail2.name}}：</text>
+                  <text>{{detail2.detail}}</text>
+                </block>
+              </view>
+            </view>
+            <!-- <text>{{detail}}</text> -->
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+  <view class='bottomItem'>
+    <view style='width:30%;font-size:28rpx;text-align:center;margin-right:20rpx;'>牙体连续横断层解剖动态图：</view>
+    <view style='width:65%;font-size:20rpx;color:#666;display:flex;flex-direction:row;'>
+      <block wx:for="{{showObj.gif}}" wx:key="gif">
+        <view style='width:50%;display:flex;flex-direction:column;align-items:center;'>
+          <image src='{{item.url}}' style='width:200rpx;' mode='widthFix'></image>
+          <text>{{item.name}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+<view style='font-size:35rpx;margin:50rpx 0 30rpx 75rpx;font-weight:bold;' wx:if="{{showObj.video.name}}">{{showObj.video.name}}</view>
+<video style='margin-left:75rpx;margin-bottom:50rpx;' wx:if="{{showObj.video.name}}" src='{{showObj.video.url}}'></video>

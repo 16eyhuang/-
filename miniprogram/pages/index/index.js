@@ -161,7 +161,7 @@ Page({
     //   }
     // })
     wx.setNavigationBarTitle({
-      title: '口腔讲堂',
+      title: '牙体解剖学习平台',
     })
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
